@@ -27,11 +27,28 @@ namespace ConsoleApp1
             serial.ReadBufferSize = 2_000;
             serial.DataReceived += Serial_DataReceived;
           
-            serial.Open();
+            while (true)
+            {
+                try
+                {
+                    if(! serial.IsOpen) 
+                    {
+                        serial.Open();
+                    }
+                   
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                }
+
+                Thread.Sleep(2_000);
+                
+            }
+            
 
             //serial.RtsEnable = false;
 
-            Console.WriteLine("Open");
             Console.ReadLine();
 
         }
